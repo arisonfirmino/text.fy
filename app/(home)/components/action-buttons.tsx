@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { HeartIcon, MessageSquareIcon, Share2Icon } from "lucide-react";
 import Link from "next/link";
+import { addLike } from "@/app/actions/like";
 
 interface ActionButtonsProps {
   id: string;
@@ -17,9 +18,20 @@ export default function ActionButtons({
 }: ActionButtonsProps) {
   const { data } = useSession();
 
+  const handleLikeClick = async () => {
+    if (data?.user?.id) {
+      await addLike({ userId: data.user.id, postId: id });
+    } else {
+      console.error("User is not logged in");
+    }
+  };
+
   return (
     <div className="flex items-center gap-5">
-      <button className="flex items-center gap-1.5 text-sm">
+      <button
+        onClick={handleLikeClick}
+        className="flex items-center gap-1.5 text-sm"
+      >
         <HeartIcon size={16} /> {likes_length}
       </button>
 

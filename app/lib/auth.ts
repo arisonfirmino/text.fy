@@ -4,6 +4,17 @@ import { db } from "./prisma";
 import GoogleProvider from "next-auth/providers/google";
 import { Adapter } from "next-auth/adapters";
 
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
+
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
@@ -13,7 +24,8 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session, user }) {
+      session.user.id = user.id;
       return session;
     },
   },

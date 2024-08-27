@@ -45,6 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  postsLiked    Like[]    @relation("UserLikes")
 
   @@map("users")
 }
@@ -53,10 +54,11 @@ model Post {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   email      String
-  image   String?
+  image      String?
   text       String
   likes      Int       @default(0)
   comments   Comment[]
+  likedBy    Like[]    @relation("PostLikes")
   created_at DateTime  @default(now())
 
   @@map("posts")
@@ -66,11 +68,24 @@ model Comment {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   email      String
-  image   String?
+  image      String?
   text       String
   post       Post     @relation(fields: [postId], references: [id])
   postId     String   @db.ObjectId
   created_at DateTime @default(now())
 
   @@map("comments")
+}
+
+model Like {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  postId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserLikes")
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade, name: "PostLikes")
+
+  @@unique([userId, postId])
+  @@map("likes")
 }
