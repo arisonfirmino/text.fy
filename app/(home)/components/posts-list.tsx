@@ -1,5 +1,5 @@
 import { Post as PostType, Comment } from "@prisma/client";
-import Post from "./post";
+import Post from "./post-action";
 
 export interface PostsListProps {
   posts: (PostType & { comments: Comment[] })[];
