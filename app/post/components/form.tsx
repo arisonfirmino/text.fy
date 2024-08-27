@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { MoveRightIcon } from "lucide-react";
+import { createNewPost } from "@/app/actions/post";
 
 const schema = yup.object({
   text: yup.string().required().min(3),
@@ -30,8 +31,9 @@ export default function Form() {
       image: session?.user?.image ?? "",
     };
 
-    reset();
-    console.log(formData);
+    await createNewPost(formData).then(() => {
+      reset();
+    });
   };
 
   return (

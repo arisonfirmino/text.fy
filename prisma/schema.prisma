@@ -48,3 +48,14 @@ model User {
 
   @@map("users")
 }
+
+model Post {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String
+  text       String
+  image      String?
+  created_at DateTime @default(now())
+
+  @@map("posts")
+}
