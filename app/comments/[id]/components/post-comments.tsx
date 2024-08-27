@@ -1,10 +1,10 @@
+import Image from "next/image";
 import { Prisma } from "@prisma/client";
 import { DotIcon } from "lucide-react";
-import Image from "next/image";
-import ActionButtons from "./action-buttons";
 import { formatTimeAgo } from "@/app/helpers/date";
+import ActionButtons from "@/app/(home)/components/action-buttons";
 
-interface PostProps {
+interface PostCommentsProps {
   post: Prisma.PostGetPayload<{
     include: {
       comments: true;
@@ -12,9 +12,9 @@ interface PostProps {
   }>;
 }
 
-export default function Post({ post }: PostProps) {
+export default function PostComments({ post }: PostCommentsProps) {
   return (
-    <div className="flex flex-col gap-1.5 border-b border-solid border-black pb-2.5">
+    <div className="flex flex-col gap-2.5">
       <div className="flex gap-2.5 rounded-xl bg-white p-2.5 shadow-sm">
         <Image
           src={post.image ?? ""}
@@ -42,11 +42,6 @@ export default function Post({ post }: PostProps) {
         likes_length={post.likes}
         comments_length={post.comments.length}
       />
-
-      <span className="text-xs">
-        curtido por <span className="font-medium">Arison Firmino</span> e outras{" "}
-        <span className="font-medium">5</span> pessoas
-      </span>
     </div>
   );
 }

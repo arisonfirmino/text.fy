@@ -4,6 +4,9 @@ import PostsList from "./components/posts-list";
 
 const fetch = async () => {
   const getPosts = await db.post.findMany({
+    include: {
+      comments: true,
+    },
     orderBy: {
       created_at: "desc",
     },
