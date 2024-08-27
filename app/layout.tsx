@@ -4,6 +4,8 @@ import "./globals.css";
 import AuthProvider from "./providers/auth";
 import Header from "./components/header/header";
 import Nav from "./components/nav";
+import Container from "./components/container";
+import SideMenu from "./components/side-menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +23,25 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${inter.className} bg-container text-black`}>
         <AuthProvider>
-          <div className="px-5 pt-5">
-            <Header />
-          </div>
+          <Container>
+            <div className="hidden p-5 md:block">
+              <SideMenu />
+            </div>
 
-          <div className="flex items-center justify-center px-5 pt-5">
-            <Nav />
-          </div>
+            <div className="min-h-screen w-full border-solid border-gray-400 md:border-l xl:w-[600px] xl:border-x">
+              <div className="px-5 pt-5">
+                <Header />
+              </div>
 
-          {children}
+              <div className="flex items-center justify-center px-5 pt-5 md:hidden">
+                <Nav />
+              </div>
+
+              {children}
+            </div>
+
+            <div className="hidden p-5 xl:block"></div>
+          </Container>
         </AuthProvider>
       </body>
     </html>
