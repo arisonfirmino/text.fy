@@ -10,7 +10,7 @@ export default function LikeButton({
   likes,
 }: {
   id: string;
-  likes: number;
+  likes?: number;
 }) {
   const { data } = useSession();
 
