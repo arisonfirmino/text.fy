@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
-import Button from "../button";
 import { UserIcon } from "lucide-react";
 import Image from "next/image";
+import Button from "./button";
 
 export default function LoginSession() {
   const handleLogInClick = () => signIn("google");

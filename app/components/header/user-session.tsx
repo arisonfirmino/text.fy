@@ -1,7 +1,7 @@
 import { signOut } from "next-auth/react";
 import { LogOutIcon } from "lucide-react";
 import Image from "next/image";
-import Button from "../button";
+import Button from "./button";
 
 interface UserSessionProps {
   name: string;

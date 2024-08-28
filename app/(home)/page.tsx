@@ -34,7 +34,9 @@ export default async function Home() {
         <PageTitle>Publicações</PageTitle>
       </div>
 
-      <PostsList posts={posts} />
+      <div className="flex flex-col gap-5 px-5 pt-5">
+        <PostsList posts={posts} />
+      </div>
     </>
   );
 }

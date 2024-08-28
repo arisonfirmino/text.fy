@@ -1,5 +1,7 @@
 import { Post as PostType, Comment, Like, User } from "@prisma/client";
-import PostAction from "./post-action";
+import Post from "@/app/components/post";
+import ActionButtons from "@/app/components/action_buttons/action-buttons";
+import { getLikeText } from "@/app/helpers/likeText";
 
 export interface PostsListProps {
   posts: (PostType & {
@@ -10,10 +12,25 @@ export interface PostsListProps {
 
 export default function PostsList({ posts }: PostsListProps) {
   return (
-    <div className="flex flex-col gap-5 px-5 pt-5">
+    <>
       {posts.map((post) => (
-        <PostAction key={post.id} post={post} />
+        <div
+          key={post.id}
+          className="flex flex-col gap-1.5 border-b border-solid border-black pb-2.5"
+        >
+          <Post post={post} />
+
+          <ActionButtons
+            id={post.id}
+            likes={post.likes}
+            comments_length={post.comments.length}
+          />
+
+          <span className="text-xs">
+            {getLikeText(post.likedBy, post.likes)}
+          </span>
+        </div>
       ))}
-    </div>
+    </>
   );
 }

@@ -30,7 +30,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="flex gap-5 rounded-full bg-white p-1 shadow-md">
+    <nav className="flex gap-5 rounded-full bg-white p-1 shadow-md md:flex-col md:bg-transparent md:shadow-none">
       {nav_items.map((item, index) => (
         <Link
           key={index}

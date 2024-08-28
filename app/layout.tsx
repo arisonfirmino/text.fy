@@ -5,7 +5,6 @@ import AuthProvider from "./providers/auth";
 import Header from "./components/header/header";
 import Nav from "./components/nav";
 import Container from "./components/container";
-import SideMenu from "./components/side-menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +23,8 @@ export default function RootLayout({
       <body className={`${inter.className} bg-container text-black`}>
         <AuthProvider>
           <Container>
-            <div className="hidden justify-end p-5 md:flex xl:w-full">
-              <SideMenu />
+            <div className="hidden justify-end p-2.5 md:flex xl:w-full">
+              <Nav />
             </div>
 
             <div className="min-h-screen w-full border-solid border-gray-400 md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x">
