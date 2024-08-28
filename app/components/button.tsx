@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       onClick={handleClick}
-      className={`flex h-10 w-10 items-center justify-center rounded-full bg-black text-white active:bg-gray-400 active:text-gray-600 ${className}`}
+      className={`flex h-10 w-10 items-center justify-center rounded-full bg-black ${className}`}
     >
       {children}
     </button>

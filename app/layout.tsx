@@ -27,7 +27,7 @@ export default function RootLayout({
               <Nav />
             </div>
 
-            <div className="min-h-screen w-full border-solid border-gray-400 md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x">
+            <div className="h-full w-full overflow-auto border-solid border-gray-400 md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x [&::-webkit-scrollbar]:hidden">
               <div className="px-5 pt-5">
                 <Header />
               </div>
@@ -39,7 +39,7 @@ export default function RootLayout({
               {children}
             </div>
 
-            <div className="hidden w-full justify-start p-5 xl:flex"></div>
+            <div className="hidden w-full justify-start p-2.5 xl:flex"></div>
           </Container>
         </AuthProvider>
       </body>

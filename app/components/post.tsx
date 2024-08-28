@@ -33,7 +33,11 @@ export default function Post({ post }: PostProps) {
           </span>
         </div>
 
-        <p className="text-sm">{post.text}</p>
+        {post.text.split("\n").map((line, index) => (
+          <p key={index} className="text-sm">
+            {line}
+          </p>
+        ))}
       </div>
 
       {data?.user.email === post.email && <DeletePost id={post.id} />}

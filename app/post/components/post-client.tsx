@@ -8,7 +8,7 @@ export default function PostClient() {
   const { data } = useSession();
 
   return (
-    <div>
+    <>
       {data?.user ? (
         <div className="px-5 py-5">
           <Form />
@@ -18,6 +18,6 @@ export default function PostClient() {
           <RedirectLogin />
         </div>
       )}
-    </div>
+    </>
   );
 }

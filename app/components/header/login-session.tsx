@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
 import { UserIcon } from "lucide-react";
 import Image from "next/image";
-import Button from "./button";
+import Button from "../button";
 
 export default function LoginSession() {
   const handleLogInClick = () => signIn("google");
@@ -20,7 +20,7 @@ export default function LoginSession() {
       </div>
 
       <Button handleClick={handleLogInClick}>
-        <UserIcon />
+        <UserIcon className="text-white" />
       </Button>
     </>
   );
