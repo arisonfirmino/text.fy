@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "../lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export const addLike = async ({
   userId,
@@ -50,6 +51,7 @@ export const addLike = async ({
       },
     });
 
+    revalidatePath("/");
     return { liked: false };
   } else {
     await db.like.create({
@@ -70,6 +72,7 @@ export const addLike = async ({
       },
     });
 
+    revalidatePath("/");
     return { liked: true };
   }
 };
@@ -85,5 +88,6 @@ export const checkIfPostLikedByUser = async (
     },
   });
 
+  revalidatePath("/");
   return !!like;
 };

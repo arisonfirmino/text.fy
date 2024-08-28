@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "../lib/prisma";
+import { revalidatePath } from "next/cache";
 
 interface createNewCommentProps {
   postId: string;
@@ -36,4 +37,30 @@ export const createNewComment = async ({
       text,
     },
   });
+
+  revalidatePath("/");
+};
+
+export const deleteComment = async ({ id }: { id: string }) => {
+  if (!id) {
+    throw new Error("Falha na solicitação.");
+  }
+
+  const comment = await db.comment.findFirst({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!comment) {
+    throw new Error("Comentário não encontrado.");
+  }
+
+  await db.comment.delete({
+    where: {
+      id: comment.id,
+    },
+  });
+
+  revalidatePath("/");
 };
