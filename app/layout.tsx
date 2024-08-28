@@ -24,11 +24,11 @@ export default function RootLayout({
       <body className={`${inter.className} bg-container text-black`}>
         <AuthProvider>
           <Container>
-            <div className="hidden p-5 md:block">
+            <div className="hidden justify-end p-5 md:flex xl:w-full">
               <SideMenu />
             </div>
 
-            <div className="min-h-screen w-full border-solid border-gray-400 md:border-l xl:w-[600px] xl:border-x">
+            <div className="min-h-screen w-full border-solid border-gray-400 md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x">
               <div className="px-5 pt-5">
                 <Header />
               </div>
@@ -40,7 +40,7 @@ export default function RootLayout({
               {children}
             </div>
 
-            <div className="hidden p-5 xl:block"></div>
+            <div className="hidden w-full justify-start p-5 xl:flex"></div>
           </Container>
         </AuthProvider>
       </body>

@@ -6,6 +6,14 @@ const fetch = async () => {
   const getPosts = await db.post.findMany({
     include: {
       comments: true,
+      likedBy: {
+        include: {
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
     orderBy: {
       created_at: "desc",

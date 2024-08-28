@@ -1,11 +1,17 @@
 import { Prisma } from "@prisma/client";
-import ActionButtons from "./action-buttons";
+import ActionButtons from "../../components/action_buttons/action-buttons";
 import Post from "@/app/components/post";
+import { getLikeText } from "@/app/helpers/likeText";
 
 interface PostProps {
   post: Prisma.PostGetPayload<{
     include: {
       comments: true;
+      likedBy: {
+        include: {
+          user: true;
+        };
+      };
     };
   }>;
 }
@@ -17,14 +23,11 @@ export default function PostAction({ post }: PostProps) {
 
       <ActionButtons
         id={post.id}
-        likes_length={post.likes}
+        likes={post.likes}
         comments_length={post.comments.length}
       />
 
-      <span className="text-xs">
-        curtido por <span className="font-medium">Arison Firmino</span> e outras{" "}
-        <span className="font-medium">5</span> pessoas
-      </span>
+      <span className="text-xs">{getLikeText(post.likedBy, post.likes)}</span>
     </div>
   );
 }

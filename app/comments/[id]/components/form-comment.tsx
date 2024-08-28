@@ -37,7 +37,7 @@ export default function FormComment({ id }: { id: string }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="fixed bottom-0 left-1/2 w-full -translate-x-1/2 transform bg-container p-5"
+      className="fixed bottom-0 left-1/2 w-full -translate-x-1/2 transform border-solid border-gray-400 bg-container p-5 xl:max-w-[600px] xl:border-x"
     >
       <div className="flex flex-col items-end gap-2.5">
         <textarea

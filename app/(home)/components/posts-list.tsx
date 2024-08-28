@@ -1,8 +1,11 @@
-import { Post as PostType, Comment } from "@prisma/client";
+import { Post as PostType, Comment, Like, User } from "@prisma/client";
 import PostAction from "./post-action";
 
 export interface PostsListProps {
-  posts: (PostType & { comments: Comment[] })[];
+  posts: (PostType & {
+    comments: Comment[];
+    likedBy: (Like & { user: User })[];
+  })[];
 }
 
 export default function PostsList({ posts }: PostsListProps) {

@@ -73,3 +73,17 @@ export const addLike = async ({
     return { liked: true };
   }
 };
+
+export const checkIfPostLikedByUser = async (
+  postId: string,
+  userId: string,
+): Promise<boolean> => {
+  const like = await db.like.findFirst({
+    where: {
+      postId: postId,
+      userId: userId,
+    },
+  });
+
+  return !!like;
+};

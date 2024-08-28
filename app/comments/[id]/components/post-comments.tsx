@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Prisma } from "@prisma/client";
 import { DotIcon } from "lucide-react";
 import { formatTimeAgo } from "@/app/helpers/date";
-import ActionButtons from "@/app/(home)/components/action-buttons";
+import ActionButtons from "@/app/components/action_buttons/action-buttons";
 
 interface PostCommentsProps {
   post: Prisma.PostGetPayload<{
@@ -39,7 +39,7 @@ export default function PostComments({ post }: PostCommentsProps) {
 
       <ActionButtons
         id={post.id}
-        likes_length={post.likes}
+        likes={post.likes}
         comments_length={post.comments.length}
       />
     </div>
