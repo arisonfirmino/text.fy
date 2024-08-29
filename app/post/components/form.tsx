@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { MoveRightIcon } from "lucide-react";
 import { createNewPost } from "@/app/actions/post";
+import Sooner from "./sooner";
+import { useState } from "react";
 
 const schema = yup.object({
   text: yup.string().required().min(3),
@@ -13,6 +15,7 @@ const schema = yup.object({
 
 export default function Form() {
   const { data: session } = useSession();
+  const [showSooner, setShowSooner] = useState(false);
 
   const {
     register,
@@ -33,6 +36,10 @@ export default function Form() {
 
     await createNewPost(formData).then(() => {
       reset();
+      setShowSooner(true);
+      setTimeout(() => {
+        setShowSooner(false);
+      }, 3500);
     });
   };
 
@@ -55,6 +62,8 @@ export default function Form() {
         Publicar
         <MoveRightIcon />
       </button>
+
+      {showSooner && <Sooner />}
     </form>
   );
 }
