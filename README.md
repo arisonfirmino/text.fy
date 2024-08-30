@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Preview](https://utfs.io/f/c89f11c2-1c9f-4b35-9bd6-ab7a3a3c4f97-248bx.fy.png)
 
-## Getting Started
+Estou super animado em compartilhar este projeto! 🎉 Este é o início de algo especial, e você pode fazer parte disso.
 
-First, run the development server:
+Nesta rede social, você encontrará um espaço para se conectar, compartilhar e explorar uma variedade de funcionalidades que criei. Navegue pela aplicação, compartilhe suas ideias, curta o que você gosta e descubra novos amigos. 🌟
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Estamos aqui para construir uma comunidade juntos. Portanto, sinta-se à vontade para se expressar, se divertir e fazer novas conexões! 😊 Aproveite cada recurso, explore cada canto e não hesite em nos dar seu feedback para ajudar a melhorar a aplicação. 💬
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 acesse a aplicação [aqui](https://text-fy.vercel.app).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## SOBRE O PROJETO
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Text.fy é uma aplicação web fullstack que desenvolvi para aplicar e expandir os conhecimentos que venho adquirindo ao longo da minha jornada na programação. O projeto foi desenvolvido como uma rede social focada em postagens de texto, permitindo que os usuários compartilhem pensamentos, ideias e interajam entre si diretamente na plataforma.
 
-## Learn More
+Utilizei Next.js para desenvolver toda a aplicação, o que permitiu tratar componentes e páginas de forma unificada, integrando funcionalidades de server-side rendering (SSR) e client-side rendering (CSR) de maneira harmoniosa. As operações do lado do servidor, como funções assíncronas, são definidas dentro da própria estrutura do projeto, sem a necessidade de separação em diretórios distintos. Isso simplifica a manutenção e o desenvolvimento, permitindo que o código do servidor e do cliente compartilhem lógica e componentes, tornando o processo de desenvolvimento mais eficiente.
 
-To learn more about Next.js, take a look at the following resources:
+Utilizei a biblioteca NextAuth para implementar o sistema de login da aplicação e vincular cada publicação a um usuário. Assim, é possível visualizar as publicações de outros usuários sem a necessidade de login. No entanto, para interagir com as postagens como curtir, visualizar comentários ou criar novas publicações é necessário estar logado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A aplicação possui uma interface intuitiva e fácil de usar, com uma estrutura composta por cinco páginas principais. A página Home lista todas as publicações criadas e armazenadas no banco de dados. A página Explore oferece um campo de pesquisa que permite ao usuário buscar todas as publicações de um usuário específico. Também desenvolvi uma página que exibe todas as publicações curtidas pelo usuário, além de uma página com um formulário para criar novas publicações. Por fim, há uma página dedicada aos comentários, onde é possível visualizar todos os comentários associados a uma publicação e adicionar novos comentários através de um formulário.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## TECNOLOGIAS USADAS
 
-## Deploy on Vercel
+Como mencionado anteriormente, utilizei Next.js para a estrutura geral do projeto e TypeScript para garantir uma base sólida e tipada para o desenvolvimento.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Para a estilização, optei por TailwindCSS. Essa escolha permitiu criar estilos de forma rápida e eficiente, reduzindo a necessidade de escrever CSS personalizado. Além disso, minha familiaridade com a biblioteca facilitou a implementação e otimização do design.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Para armazenar os dados da aplicação, como publicações, comentários e informações de usuários, utilizei MongoDB, que oferece flexibilidade na estruturação dos dados.
+
+Para facilitar o gerenciamento e a manipulação desses dados, empreguei o Prisma. Com o Prisma, criei um schema que define a estrutura dos dados e proporciona uma interface eficiente para interagir com o banco de dados.
+
+Também utilizei Lucide Icons para incorporar ícones em várias partes do projeto, melhorando a interface e a usabilidade. Para simplificar a validação dos formulários, empreguei React Hook Form, que facilita a gestão de estados e validações de maneira eficiente e intuitiva.
