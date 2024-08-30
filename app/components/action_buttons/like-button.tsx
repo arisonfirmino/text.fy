@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { addLike, checkIfPostLikedByUser } from "@/app/actions/like";
-import { HeartIcon } from "lucide-react";
+import { HeartIcon, LoaderCircleIcon } from "lucide-react";
 
 export default function LikeButton({
   id,
@@ -15,6 +15,7 @@ export default function LikeButton({
   const { data } = useSession();
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
@@ -29,7 +30,16 @@ export default function LikeButton({
 
   const handleLikeClick = async () => {
     if (data?.user?.id) {
-      await addLike({ userId: data.user.id, postId: id });
+      setIsLoading(true);
+
+      try {
+        await addLike({ userId: data.user.id, postId: id });
+        setIsLiked(true);
+      } catch (error) {
+        console.error("Failed to like the post", error);
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       console.error("User is not logged in");
     }
@@ -38,9 +48,17 @@ export default function LikeButton({
   return (
     <button
       onClick={handleLikeClick}
-      className="flex items-center gap-1.5 text-sm"
+      disabled={!data?.user || isLoading}
+      className={`flex items-center gap-1.5 text-sm ${!data?.user || isLoading ? "cursor-not-allowed" : ""}`}
     >
-      <HeartIcon size={16} className={isLiked ? "fill-red-600" : ""} /> {likes}
+      {isLoading ? (
+        <LoaderCircleIcon size={16} className="animate-spin" />
+      ) : (
+        <>
+          <HeartIcon size={16} className={isLiked ? "fill-red-600" : ""} />
+          {likes}
+        </>
+      )}
     </button>
   );
 }

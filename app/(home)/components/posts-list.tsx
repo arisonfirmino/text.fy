@@ -1,7 +1,10 @@
+"use client";
+
 import { Post as PostType, Comment, Like, User } from "@prisma/client";
 import Post from "@/app/components/post";
 import ActionButtons from "@/app/components/action_buttons/action-buttons";
 import { getLikeText } from "@/app/helpers/likeText";
+import { motion } from "framer-motion";
 
 export interface PostsListProps {
   posts: (PostType & {
@@ -13,8 +16,11 @@ export interface PostsListProps {
 export default function PostsList({ posts }: PostsListProps) {
   return (
     <>
-      {posts.map((post) => (
-        <div
+      {posts.map((post, index) => (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: index * 0.3 }}
           key={post.id}
           className="flex flex-col gap-1.5 border-b border-solid border-black pb-2.5"
         >
@@ -29,7 +35,7 @@ export default function PostsList({ posts }: PostsListProps) {
           <span className="text-xs">
             {getLikeText(post.likedBy, post.likes)}
           </span>
-        </div>
+        </motion.div>
       ))}
     </>
   );
