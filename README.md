@@ -1,4 +1,4 @@
-![Preview](https://utfs.io/f/c89f11c2-1c9f-4b35-9bd6-ab7a3a3c4f97-248bx.fy.png)
+![Preview](https://utfs.io/f/b1af5fcc-df63-4f91-821d-9f71353567ab-248bx.fy.png)
 
 Estou super animado em compartilhar este projeto! 🎉 Este é o início de algo especial, e você pode fazer parte disso.
 
