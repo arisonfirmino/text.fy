@@ -3,25 +3,29 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import RedirectLogin from "@/app/components/redirect-login";
-import { Post as PostType } from "@prisma/client";
+import { Post as PostType, User } from "@prisma/client";
 import Search from "./search";
 import Post from "@/app/components/post";
 
 interface ExploreClientProps {
-  posts: PostType[];
+  posts: (PostType & {
+    user: User;
+  })[];
 }
 
 export default function ExploreClient({ posts }: ExploreClientProps) {
   const { data } = useSession();
 
-  const [filteredPosts, setFilteredPosts] = useState<PostType[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<
+    (PostType & { user: User })[]
+  >([]);
 
   const handleSearch = (term: string) => {
     if (term.trim() === "") {
       setFilteredPosts([]);
     } else {
       const results = posts.filter((post) =>
-        post.name.toLowerCase().includes(term.toLowerCase()),
+        post.user.name?.toLowerCase().includes(term.toLowerCase()),
       );
       setFilteredPosts(results);
     }
