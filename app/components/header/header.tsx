@@ -2,17 +2,19 @@
 
 import { useSession } from "next-auth/react";
 import LoginSession from "./login-session";
-import UserSession from "./user-session";
+import LogOutSession from "./logout-session";
 
 export default function Header() {
   const { data } = useSession();
 
   return (
-    <header className="flex items-center justify-between rounded-full bg-white p-2.5 shadow-md">
+    <header className="flex justify-between">
+      <h1 className="style-script text-4xl font-semibold">Text.fy</h1>
+
       {data?.user ? (
-        <UserSession
-          name={data.user.name ?? ""}
+        <LogOutSession
           image={data.user.image ?? ""}
+          name={data.user.name ?? ""}
         />
       ) : (
         <LoginSession />

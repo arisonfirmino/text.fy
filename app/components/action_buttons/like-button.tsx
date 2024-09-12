@@ -40,8 +40,6 @@ export default function LikeButton({
       } finally {
         setIsLoading(false);
       }
-    } else {
-      console.error("User is not logged in");
     }
   };
 
@@ -54,10 +52,7 @@ export default function LikeButton({
       {isLoading ? (
         <LoaderCircleIcon size={16} className="animate-spin" />
       ) : (
-        <>
-          <HeartIcon size={16} className={isLiked ? "fill-red-600" : ""} />
-          {likes}
-        </>
+        <HeartIcon size={16} className={isLiked ? "fill-red-600" : ""} />
       )}
     </button>
   );

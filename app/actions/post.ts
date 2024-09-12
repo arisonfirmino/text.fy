@@ -4,28 +4,19 @@ import { db } from "../lib/prisma";
 import { revalidatePath } from "next/cache";
 
 interface createNewPostProps {
-  name: string;
-  email: string;
+  userId: string;
   text: string;
-  image?: string;
 }
 
-export const createNewPost = async ({
-  name,
-  email,
-  text,
-  image,
-}: createNewPostProps) => {
-  if (!name || !email || !text) {
+export const createNewPost = async ({ userId, text }: createNewPostProps) => {
+  if (!userId || !text) {
     throw new Error("Campos não preenchidos.");
   }
 
   await db.post.create({
     data: {
-      name,
-      email,
+      userId,
       text,
-      image,
     },
   });
 

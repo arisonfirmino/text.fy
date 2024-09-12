@@ -1,4 +1,4 @@
-import { Share2Icon } from "lucide-react";
+import { SendIcon } from "lucide-react";
 import LikeButton from "./like-button";
 import CommentButton from "./comment-button";
 
@@ -14,13 +14,13 @@ export default function ActionButtons({
   comments_length,
 }: ActionButtonsProps) {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-2.5">
       <LikeButton id={id} likes={likes} />
 
       <CommentButton id={id} comments_length={comments_length} />
 
       <button>
-        <Share2Icon size={16} />
+        <SendIcon size={16} />
       </button>
     </div>
   );

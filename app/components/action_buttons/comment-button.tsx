@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { MessageSquareIcon } from "lucide-react";
+import { MessageCircleIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function CommentButton({
@@ -21,14 +21,14 @@ export default function CommentButton({
           href={`/comments/${id}`}
           className="flex items-center gap-1.5 text-sm"
         >
-          <MessageSquareIcon size={16} /> {comments_length}
+          <MessageCircleIcon size={16} />
         </Link>
       ) : (
         <button
           onClick={handleLogInClick}
           className="flex items-center gap-1.5 text-sm"
         >
-          <MessageSquareIcon size={16} /> {comments_length}
+          <MessageCircleIcon size={16} />
         </button>
       )}
     </>

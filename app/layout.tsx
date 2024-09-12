@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/auth";
-import Header from "./components/header/header";
 import Nav from "./components/nav";
 import Container from "./components/container";
 
@@ -23,19 +22,11 @@ export default function RootLayout({
       <body className={`${inter.className} bg-container text-black`}>
         <AuthProvider>
           <Container>
-            <div className="hidden justify-end p-2.5 md:flex xl:w-full">
+            <div className="justify-end md:flex md:p-5 xl:w-full">
               <Nav />
             </div>
 
-            <div className="h-full w-full overflow-auto border-solid border-gray-400 md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x [&::-webkit-scrollbar]:hidden">
-              <div className="px-5 pt-5">
-                <Header />
-              </div>
-
-              <div className="flex items-center justify-center px-5 pt-5 md:hidden">
-                <Nav />
-              </div>
-
+            <div className="h-full w-full overflow-auto border-solid border-gray-400 pb-20 md:border-l md:pb-5 xl:min-w-[600px] xl:max-w-[600px] xl:border-x [&::-webkit-scrollbar]:hidden">
               {children}
             </div>
 

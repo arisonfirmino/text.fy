@@ -1,13 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { MoveRightIcon } from "lucide-react";
+import { LoaderCircleIcon, MoveRightIcon } from "lucide-react";
 import { createNewPost } from "@/app/actions/post";
 import Sooner from "./sooner";
-import { useState } from "react";
 
 const schema = yup.object({
   text: yup.string().required().min(3),
@@ -16,6 +16,7 @@ const schema = yup.object({
 export default function Form() {
   const { data: session } = useSession();
   const [showSooner, setShowSooner] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -27,20 +28,29 @@ export default function Form() {
   });
 
   const onSubmit = async (data: { text: string }) => {
+    if (!session?.user.id) {
+      return;
+    }
+
     const formData = {
-      name: session?.user?.name ?? "",
-      email: session?.user?.email ?? "",
+      userId: session?.user.id,
       text: data.text,
-      image: session?.user?.image ?? "",
     };
 
-    await createNewPost(formData).then(() => {
+    setIsLoading(true);
+
+    try {
+      await createNewPost(formData);
+    } catch (error) {
+      console.error("Failed to add post", error);
+    } finally {
       reset();
+      setIsLoading(false);
       setShowSooner(true);
       setTimeout(() => {
         setShowSooner(false);
       }, 3500);
-    });
+    }
   };
 
   return (
@@ -57,10 +67,20 @@ export default function Form() {
 
       <button
         type="submit"
-        className="flex items-center justify-between rounded-full bg-black px-5 py-2.5 text-white"
+        disabled={isLoading}
+        className={`flex items-center justify-between rounded-full px-5 py-2.5 text-white active:bg-gray-400 ${isLoading ? "bg-gray-400" : "bg-black"}`}
       >
-        Publicar
-        <MoveRightIcon />
+        {isLoading ? (
+          <>
+            Publicando
+            <LoaderCircleIcon size={16} className="animate-spin" />
+          </>
+        ) : (
+          <>
+            Publicar
+            <MoveRightIcon size={16} />
+          </>
+        )}
       </button>
 
       {showSooner && <Sooner />}

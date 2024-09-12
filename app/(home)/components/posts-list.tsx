@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { Post as PostType, Comment, Like, User } from "@prisma/client";
 import Post from "@/app/components/post";
 import ActionButtons from "@/app/components/action_buttons/action-buttons";
@@ -8,12 +9,15 @@ import { motion } from "framer-motion";
 
 export interface PostsListProps {
   posts: (PostType & {
+    user: User;
     comments: Comment[];
     likedBy: (Like & { user: User })[];
   })[];
 }
 
 export default function PostsList({ posts }: PostsListProps) {
+  const { data } = useSession();
+
   return (
     <>
       {posts.map((post, index) => (
@@ -32,9 +36,11 @@ export default function PostsList({ posts }: PostsListProps) {
             comments_length={post.comments.length}
           />
 
-          <span className="text-xs">
-            {getLikeText(post.likedBy, post.likes)}
-          </span>
+          {data?.user && (
+            <span className="text-xs">
+              {getLikeText(post.likedBy, post.likes)}
+            </span>
+          )}
         </motion.div>
       ))}
     </>

@@ -1,3 +1,4 @@
+import Header from "../components/header/header";
 import PageTitle from "../components/page-title";
 import { db } from "../lib/prisma";
 import PostsList from "./components/posts-list";
@@ -5,13 +6,14 @@ import PostsList from "./components/posts-list";
 const fetch = async () => {
   const getPosts = await db.post.findMany({
     include: {
+      user: true,
       comments: true,
       likedBy: {
         include: {
           user: true,
         },
         orderBy: {
-          createdAt: "desc",
+          created_at: "desc",
         },
       },
     },
@@ -30,6 +32,10 @@ export default async function Home() {
 
   return (
     <>
+      <div className="px-5 pt-5">
+        <Header />
+      </div>
+
       <div className="px-5 pt-5">
         <PageTitle>Publicações</PageTitle>
       </div>

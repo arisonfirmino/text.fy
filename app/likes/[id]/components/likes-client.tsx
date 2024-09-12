@@ -2,18 +2,18 @@
 
 import { useSession } from "next-auth/react";
 import RedirectLogin from "@/app/components/redirect-login";
-import { Post as PostType } from "@prisma/client";
+import { Post as PostType, User } from "@prisma/client";
 import Post from "@/app/components/post";
 import LikeButton from "@/app/components/action_buttons/like-button";
 
 interface LikesClientProps {
-  posts: PostType[];
+  posts: (PostType & {
+    user: User;
+  })[];
 }
 
 export default function LikesClient({ posts }: LikesClientProps) {
   const { data } = useSession();
-
-  console.log(posts);
 
   return (
     <>

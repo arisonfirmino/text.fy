@@ -18,7 +18,11 @@ export default async function Likes({ params }: LikesPageProps) {
     include: {
       postsLiked: {
         include: {
-          post: true,
+          post: {
+            include: {
+              user: true,
+            },
+          },
         },
       },
     },

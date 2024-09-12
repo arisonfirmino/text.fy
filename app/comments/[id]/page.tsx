@@ -18,6 +18,7 @@ export default async function Comments({ params }: CommentsPageProps) {
       id: id,
     },
     include: {
+      user: true,
       comments: {
         orderBy: {
           created_at: "desc",
@@ -33,7 +34,7 @@ export default async function Comments({ params }: CommentsPageProps) {
   return (
     <>
       <div className="px-5 pt-5">
-        <PageTitle>Publicação de {post.name}</PageTitle>
+        <PageTitle>Publicação de {post.user.name}</PageTitle>
       </div>
 
       <div className="px-5 pt-5">

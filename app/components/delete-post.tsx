@@ -30,7 +30,7 @@ export default function DeleteButton({ id }: { id: string }) {
       className="absolute right-1 top-1 rounded-full bg-red-300 p-1 text-xs text-red-600 active:bg-black active:text-white"
     >
       {isLoading ? (
-        <LoaderCircleIcon size={16} className="animate-spin" />
+        <LoaderCircleIcon size={12} className="animate-spin" />
       ) : (
         <Trash2Icon size={12} />
       )}

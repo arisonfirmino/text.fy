@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         container: "var(--container)",
+        background: "var(--background)",
+        primary: "var(--primary)",
+        foreground: "var(--foreground)",
       },
       keyframes: {
         spin: {
