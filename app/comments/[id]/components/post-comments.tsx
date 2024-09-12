@@ -1,13 +1,12 @@
-import { Prisma } from "@prisma/client";
+import { Post as PostType, User, Comment } from "@prisma/client";
 import ActionButtons from "@/app/components/action_buttons/action-buttons";
 import Post from "@/app/components/post";
 
 interface PostCommentsProps {
-  post: Prisma.PostGetPayload<{
-    include: {
-      comments: true;
-    };
-  }>;
+  post: PostType & {
+    user: User;
+    comments: Comment[];
+  };
 }
 
 export default function PostComments({ post }: PostCommentsProps) {
