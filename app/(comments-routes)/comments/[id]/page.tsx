@@ -41,11 +41,7 @@ export default async function Comments({ params }: CommentsPageProps) {
       <div className="space-y-2.5 px-5 pt-5">
         <Post post={post} />
 
-        <ActionButtons
-          id={post.id}
-          likes={post.likes}
-          comments_length={post.comments.length}
-        />
+        <ActionButtons id={post.id} likes={post.likes} />
       </div>
 
       <div className="px-5 pt-5">
