@@ -43,7 +43,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  followers     Int       @default(0)
+  followers     Follow[]  @relation("UserFollowers")
+  following     Follow[]  @relation("UserFollowing")
   posts         Post[]
   accounts      Account[]
   sessions      Session[]
@@ -76,6 +77,18 @@ model Comment {
   created_at DateTime @default(now())
 
   @@map("comments")
+}
+
+model Follow {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  followerId  String   @db.ObjectId
+  followingId String   @db.ObjectId
+  follower    User     @relation("UserFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+  created_at  DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@map("follows")
 }
 
 model Like {

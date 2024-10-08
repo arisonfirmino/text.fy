@@ -5,19 +5,14 @@ import CommentButton from "./comment-button";
 interface ActionButtonsProps {
   id: string;
   likes: any;
-  comments_length: number;
 }
 
-export default function ActionButtons({
-  id,
-  likes,
-  comments_length,
-}: ActionButtonsProps) {
+export default function ActionButtons({ id, likes }: ActionButtonsProps) {
   return (
     <div className="flex items-center gap-2.5">
       <LikeButton id={id} likes={likes} />
 
-      <CommentButton id={id} comments_length={comments_length} />
+      <CommentButton id={id} />
 
       <button>
         <SendIcon size={16} />

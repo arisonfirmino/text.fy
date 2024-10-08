@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/auth";
-import Nav from "./components/nav";
 import Container from "./components/container";
+import MobileNav from "./components/nav/mobile-nav";
+import DesktopNav from "./components/nav/desktop-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,15 +23,19 @@ export default function RootLayout({
       <body className={`${inter.className} bg-container text-black`}>
         <AuthProvider>
           <Container>
-            <div className="justify-end md:flex md:p-5 xl:w-full">
-              <Nav />
+            <div className="md:hidden">
+              <MobileNav />
             </div>
 
-            <div className="h-full w-full overflow-auto border-solid border-gray-400 pb-20 md:border-l md:pb-5 xl:min-w-[600px] xl:max-w-[600px] xl:border-x [&::-webkit-scrollbar]:hidden">
+            <div className="hidden w-fit justify-end p-5 md:flex xl:w-full">
+              <DesktopNav />
+            </div>
+
+            <div className="w-full border-solid border-foreground md:border-l xl:min-w-[600px] xl:max-w-[600px] xl:border-x">
               {children}
             </div>
 
-            <div className="hidden w-full justify-start p-2.5 xl:flex"></div>
+            <div className="hidden w-full p-5 xl:flex"></div>
           </Container>
         </AuthProvider>
       </body>

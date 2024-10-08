@@ -1,19 +1,14 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Post as PostType, User } from "@prisma/client";
+import { PostProps } from "../types";
 import { DotIcon } from "lucide-react";
 import Image from "next/image";
 import { formatTimeAgo } from "../helpers/date";
 import DeletePost from "./delete-post";
+import FollowButton from "./follow-button";
 
-interface PostProps {
-  post: PostType & {
-    user: User;
-  };
-}
-
-export default function Post({ post }: PostProps) {
+const Post = ({ post }: PostProps) => {
   const { data } = useSession();
 
   return (
@@ -35,14 +30,16 @@ export default function Post({ post }: PostProps) {
           </span>
         </div>
 
-        {post.text.split("\n").map((line, index) => (
-          <p key={index} className="text-sm">
-            {line}
-          </p>
-        ))}
+        <p className="text-sm">{post.text}</p>
       </div>
 
-      {data?.user.email === post.user.email && <DeletePost id={post.id} />}
+      {data?.user.email === post.user.email ? (
+        <DeletePost id={post.id} />
+      ) : (
+        <FollowButton user={post.user} />
+      )}
     </div>
   );
-}
+};
+
+export default Post;

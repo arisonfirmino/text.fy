@@ -1,48 +1,20 @@
-import Header from "../components/header/header";
-import PageTitle from "../components/page-title";
-import { db } from "../lib/prisma";
-import PostsList from "./components/posts-list";
-
-const fetch = async () => {
-  const getPosts = await db.post.findMany({
-    include: {
-      user: true,
-      comments: true,
-      likedBy: {
-        include: {
-          user: true,
-        },
-        orderBy: {
-          created_at: "desc",
-        },
-      },
-    },
-    orderBy: {
-      created_at: "desc",
-    },
-  });
-
-  const [posts] = await Promise.all([getPosts]);
-
-  return { posts };
-};
+import { getServerSession } from "next-auth";
+import { authOptions } from "../lib/auth";
+import { redirect } from "next/navigation";
+import Welcome from "./components/welcome";
+import SignIn from "./components/signin";
 
 export default async function Home() {
-  const { posts } = await fetch();
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/timeline");
+  }
 
   return (
-    <>
-      <div className="px-5 pt-5">
-        <Header />
-      </div>
-
-      <div className="px-5 pt-5">
-        <PageTitle>Publicações</PageTitle>
-      </div>
-
-      <div className="flex flex-col gap-5 px-5 pt-5">
-        <PostsList posts={posts} />
-      </div>
-    </>
+    <main className="flex h-screen w-full flex-col items-center">
+      <Welcome />
+      <SignIn />
+    </main>
   );
 }

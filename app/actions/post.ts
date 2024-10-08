@@ -52,3 +52,35 @@ export const deletePost = async ({ id }: { id: string }) => {
 
   revalidatePath("/");
 };
+
+export const deleteAllPosts = async ({ userId }: { userId: string }) => {
+  if (!userId) {
+    throw new Error("Usuário não encontrado.");
+  }
+
+  const posts = await db.post.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  if (posts.length === 0) {
+    throw new Error("Nenhum post encontrado para o usuário.");
+  }
+
+  await db.comment.deleteMany({
+    where: {
+      postId: {
+        in: posts.map((post) => post.id),
+      },
+    },
+  });
+
+  await db.post.deleteMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  revalidatePath("/");
+};

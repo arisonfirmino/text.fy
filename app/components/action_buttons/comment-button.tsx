@@ -4,13 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { MessageCircleIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function CommentButton({
-  id,
-  comments_length,
-}: {
-  id: string;
-  comments_length: number;
-}) {
+export default function CommentButton({ id }: { id: string }) {
   const { data } = useSession();
   const handleLogInClick = () => signIn("google");
 
